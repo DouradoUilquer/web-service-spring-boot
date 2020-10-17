@@ -1,7 +1,6 @@
 package com.connectsoftware.webservice.config;
 
 import java.time.Instant;
-import java.util.ArrayList;
 import java.util.Arrays;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +11,7 @@ import org.springframework.context.annotation.Profile;
 import com.connectsoftware.webservice.entities.Category;
 import com.connectsoftware.webservice.entities.Order;
 import com.connectsoftware.webservice.entities.OrderItem;
+import com.connectsoftware.webservice.entities.Payment;
 import com.connectsoftware.webservice.entities.Product;
 import com.connectsoftware.webservice.entities.User;
 import com.connectsoftware.webservice.entities.enums.OrderStatus;
@@ -76,6 +76,11 @@ public class TestConfig implements CommandLineRunner {
 		OrderItem oi4 = new OrderItem(o3, p5, 2, p5.getPrice());
 		
 		OrderItemRepository.saveAll(Arrays.asList(oi1,oi2,oi3,oi4));
+		
+		Payment pay1 = new Payment(null, Instant.parse("2019-06-20T21:53:07Z"), o1);
+		o1.setPayment(pay1);
+		
+		orderRepository.save(o1);
 
 	}
 }
